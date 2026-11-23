@@ -22,10 +22,8 @@ function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">
-          {tr("P\xE1gina no encontrada")}
-        </h2>
+        <h1 className="title-page text-foreground">404</h1>
+        <h2 className="title-card mt-4 text-foreground">{tr("P\xE1gina no encontrada")}</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           {tr("La p\xE1gina que buscas no existe o ha cambiado de ubicaci\xF3n.")}
         </p>
@@ -53,7 +51,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
+        <h1 className="title-page text-foreground">
           {tr("No se ha podido cargar esta p\xE1gina")}
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">

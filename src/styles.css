@@ -231,12 +231,57 @@
 @utility section-space {
   padding-block: clamp(5rem, 10vw, 10rem);
 }
-@utility display-title {
+/* Shared heading scale: page, section and card (all locales). */
+@utility title-page {
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 5.5vw, 5.2rem);
-  line-height: 0.98;
+  font-size: var(--hero-title-size, clamp(2.5rem, 5.5vw, 6rem));
+  line-height: 1.08;
+  font-weight: var(--hero-title-weight, 500);
+  letter-spacing: -0.025em;
+  overflow-wrap: normal;
+  min-width: 0;
+  max-width: 100%;
+}
+/* Each hero keeps its own scale; shared H1 rhythm stays at 1.08. */
+@utility hero-title-home {
+  --hero-title-size: clamp(2.75rem, 5vw, 6.2rem);
+  --hero-title-weight: 600;
+}
+@utility hero-title-product {
+  --hero-title-size: clamp(2.5rem, 5.2vw, 6rem);
+  --hero-title-weight: 600;
+}
+@utility hero-title-solutions {
+  --hero-title-size: clamp(2.5rem, 5vw, 5.7rem);
+  --hero-title-weight: 600;
+}
+@utility hero-title-technology {
+  --hero-title-size: clamp(2.25rem, 4.1vw, 5.4rem);
+  --hero-title-weight: 600;
+
+  &:lang(pt-BR) {
+    --hero-title-size: clamp(2.25rem, 3.7vw, 3.2rem);
+  }
+}
+@utility title-section {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 4.5rem);
+  line-height: 1.08;
   font-weight: 500;
-  letter-spacing: 0;
+  letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
+  min-width: 0;
+  max-width: 100%;
+}
+@utility title-card {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  overflow-wrap: anywhere;
+  min-width: 0;
+  max-width: 100%;
 }
 @utility eyebrow {
   font-family: var(--font-display);
