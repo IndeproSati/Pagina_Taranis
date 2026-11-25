@@ -1,6 +1,6 @@
 import { tr, localizeDeep } from "@/i18n/translations";
 import { getActiveLocale, localizedPath, type Locale } from "@/i18n/config";
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useState, type FormEvent, type ReactNode, type CSSProperties } from "react";
 import { Link } from "@tanstack/react-router";
 import {
   Activity,
@@ -231,12 +231,14 @@ export function Hero() {
               grid
               items-center
               gap-14
-              lg:grid-cols-[0.76fr_1.24fr]
-              lg:gap-0
+              lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)]
+              xl:grid-cols-[minmax(0,0.4fr)_minmax(0,0.6fr)]
+              lg:gap-6
+              xl:gap-8
             "
         >
           {/* TEXTO */}
-          <div className="relative z-30 max-w-[650px]">
+          <div className="relative z-30 min-w-0 max-w-[650px]">
             <div className="mb-7 flex items-center gap-5">
               <span className="h-px w-10 bg-primary" />
 
@@ -256,12 +258,8 @@ export function Hero() {
 
             <h1
               className="
+                  title-page hero-title-home
                   max-w-[720px]
-                  font-display
-                  text-[clamp(3.8rem,5.7vw,6.2rem)]
-                  font-semibold
-                  leading-[0.9]
-                  tracking-[-0.05em]
                   text-on-dark
                 "
             >
@@ -298,6 +296,7 @@ export function Hero() {
                   flex-col
                   gap-3
                   sm:flex-row
+                  sm:flex-wrap
                   sm:items-center
                 "
             >
@@ -352,12 +351,10 @@ export function Hero() {
                 z-20
                 mx-auto
                 w-full
-  
-                lg:w-[132%]
-                lg:max-w-none
-  
-                lg:translate-x-[-265px]
-                lg:-translate-y-[-75px]
+                min-w-0
+                max-w-[850px]
+                lg:mx-0
+                lg:justify-self-end
               "
           >
             {/* Halo ambiental */}
@@ -404,8 +401,8 @@ export function Hero() {
                     transition-transform
                     duration-700
   
-                    lg:origin-right
-                    lg:[transform:rotateY(-27.7deg)_rotateX(3deg)_rotateZ(-2deg)_scale(0.9)]
+                    lg:origin-center
+                    lg:[transform:rotateY(-16deg)_rotateX(3deg)_rotateZ(-2deg)]
                   "
               >
                 {/* CONTENEDOR DE LA IMAGEN */}
@@ -787,13 +784,16 @@ function ProcessFlowDiagram() {
             grid
             gap-5
             md:grid-cols-2
-            xl:grid-cols-4
-            xl:gap-4
+            min-[68.75rem]:grid-cols-4
+            min-[68.75rem]:gap-4
           "
       >
         {processSteps.map(
           ({ number, title, subtitle, badge, image, imageAlt, Icon, imagePosition }, i) => (
-            <div key={title} className="relative">
+            <div
+              key={title}
+              className="relative min-w-0 w-full max-w-[380px] justify-self-center min-[68.75rem]:max-w-none"
+            >
               {/* TARJETA*/}
 
               <article
@@ -880,7 +880,9 @@ function ProcessFlowDiagram() {
                           font-display
                           text-[1.35rem]
                           font-semibold
-                          leading-none
+                          leading-[1.1]
+                          tracking-normal
+                          [overflow-wrap:normal]
                           text-white
                         "
                     >
@@ -916,7 +918,7 @@ function ProcessFlowDiagram() {
   
                         shadow-[0_0_0_1px_rgba(57,217,255,0.14),0_0_10px_rgba(57,217,255,0.42),0_0_22px_rgba(57,217,255,0.24),inset_0_0_10px_rgba(57,217,255,0.10)]
   
-                        2xl:flex
+
                       "
                   >
                     <Icon
@@ -1027,7 +1029,7 @@ function ProcessFlowDiagram() {
                       text-[11px]
                       text-[#9CE8FF]
   
-                      2xl:hidden
+
                     "
                 >
                   <Icon
@@ -1053,13 +1055,14 @@ function ProcessFlowDiagram() {
                       pointer-events-none
   
                       absolute
-                      -right-[27px]
+                      left-[calc(100%+0.5rem)]
                       top-1/2
                       z-30
   
                       hidden
   
                       size-10
+                      -translate-x-1/2
                       -translate-y-1/2
                       place-items-center
   
@@ -1074,7 +1077,7 @@ function ProcessFlowDiagram() {
   
                       shadow-[0_0_0_1px_rgba(57,217,255,0.12),0_0_12px_rgba(156,232,255,0.85),0_0_28px_rgba(57,217,255,0.45)]
   
-                      xl:grid
+                      min-[68.75rem]:grid
                     "
                   aria-hidden="true"
                 >
@@ -1135,7 +1138,7 @@ export function ProblemAndPipeline() {
                 grid
                 gap-12
   
-                lg:grid-cols-[1.05fr_0.95fr]
+                lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]
                 lg:items-end
               "
           >
@@ -1546,12 +1549,12 @@ export function ProblemAndPipeline() {
   
           md:grid-cols-2
   
-          xl:grid-cols-4
-          xl:gap-6
+          min-[68.75rem]:grid-cols-4
+          min-[68.75rem]:gap-6
         "
           >
             {pipelineStages.map(({ number, title, Icon, items }, i) => (
-              <div key={title} className="relative">
+              <div key={title} className="relative min-w-0">
                 {/* =================================================
                      TARJETA
                   ================================================== */}
@@ -1561,6 +1564,7 @@ export function ProblemAndPipeline() {
                   group
                   relative
   
+                  h-full
                   min-h-[330px]
   
                   overflow-hidden
@@ -1575,7 +1579,10 @@ export function ProblemAndPipeline() {
                   via-[#072B49]/95
                   to-[#051E34]/95
   
-                  p-7
+                  p-5
+                  sm:p-7
+                  min-[68.75rem]:p-4
+                  xl:p-5
   
                   shadow-[inset_0_0_0_1px_rgba(34,221,247,0.05),0_20px_60px_rgba(0,0,0,0.28),0_0_22px_rgba(0,174,255,0.05)]
   
@@ -1597,8 +1604,11 @@ export function ProblemAndPipeline() {
                     relative
                     z-30
                     flex
+                    min-w-0
                     items-center
                     gap-4
+                    min-[68.75rem]:gap-2
+                    xl:gap-3
                   "
                   >
                     {/* Número */}
@@ -1607,6 +1617,8 @@ export function ProblemAndPipeline() {
                       className="
                       grid
                       size-10
+                      min-[68.75rem]:size-9
+                      xl:size-10
                       shrink-0
                       place-items-center
   
@@ -1639,6 +1651,8 @@ export function ProblemAndPipeline() {
                       relative
                       grid
                       size-11
+                      min-[68.75rem]:size-9
+                      xl:size-10
                       shrink-0
                       place-items-center
                     "
@@ -1654,17 +1668,23 @@ export function ProblemAndPipeline() {
                         className={cn(
                           "relative z-10 text-[#37E2FF]",
                           i === 1
-                            ? "size-10 stroke-[2.15] drop-shadow-[0_0_7px_rgba(55,226,255,1)]"
-                            : "size-8 stroke-[1.9] drop-shadow-[0_0_7px_rgba(55,226,255,0.72)]",
+                            ? "size-10 min-[68.75rem]:size-8 xl:size-10 stroke-[2.15] drop-shadow-[0_0_7px_rgba(55,226,255,1)]"
+                            : "size-8 min-[68.75rem]:size-7 xl:size-8 stroke-[1.9] drop-shadow-[0_0_7px_rgba(55,226,255,0.72)]",
                         )}
                       />
                     </div>
 
                     <h3
                       className="
+                      min-w-0
                       font-display
-                      text-2xl
+                      text-xl
+                      sm:text-2xl
+                      min-[68.75rem]:text-xl
+                      xl:text-2xl
                       font-semibold
+                      tracking-normal
+                      [overflow-wrap:normal]
                       text-white
                     "
                     >
@@ -2238,13 +2258,14 @@ export function ProblemAndPipeline() {
                     pointer-events-none
   
                     absolute
-                    -right-[33px]
+                    left-[calc(100%+0.75rem)]
                     top-1/2
                     z-40
   
                     hidden
   
                     size-11
+                    -translate-x-1/2
                     -translate-y-1/2
                     place-items-center
   
@@ -2259,7 +2280,7 @@ export function ProblemAndPipeline() {
   
                     shadow-[0_0_0_1px_rgba(57,217,255,0.12),0_0_13px_rgba(156,232,255,0.95),0_0_32px_rgba(57,217,255,0.55)]
   
-                    xl:grid
+                    min-[68.75rem]:grid
                   "
                     aria-hidden="true"
                   >
@@ -2475,11 +2496,11 @@ export function ProductSection() {
             grid
             items-end
             gap-8
-            lg:grid-cols-[1.05fr_0.95fr]
+            xl:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]
             lg:gap-14
           "
         >
-          <div>
+          <div className="min-w-0">
             <div className="mb-6 flex items-center gap-4">
               <span
                 className="
@@ -2506,23 +2527,20 @@ export function ProductSection() {
 
             <h2
               className="
+                title-section
                 max-w-[850px]
-                font-display
-                text-[clamp(2.7rem,4.1vw,4.2rem)]
-                font-medium
-                leading-[0.94]
-                tracking-[-0.045em]
                 text-white
               "
             >
               <span className="block">{tr("Una interfaz para")}</span>
 
-              <span className="block sm:whitespace-nowrap">{tr("comprender lo que viene.")}</span>
+              <span className="block">{tr("comprender lo que viene.")}</span>
             </h2>
           </div>
 
           <p
             className="
+              min-w-0
               max-w-[570px]
               pb-1
               text-base
@@ -3355,16 +3373,7 @@ export function Features() {
 
           <h2
             className="
-              font-display
-
-              text-[clamp(2.8rem,4.2vw,4.6rem)]
-
-              font-medium
-
-              leading-[0.96]
-
-              tracking-[-0.04em]
-
+              title-section
               text-[#001D2D]
             "
           >
@@ -3402,7 +3411,7 @@ export function Features() {
             gap-4
 
             md:grid-cols-2
-            xl:grid-cols-4
+            min-[68.75rem]:grid-cols-4
           "
         >
           {localizeDeep(features).map(({ title, text, Icon, graphic }) => (
@@ -3412,6 +3421,7 @@ export function Features() {
                   group
                   relative
 
+                  min-w-0
                   min-h-[255px]
 
                   overflow-hidden
@@ -3424,6 +3434,10 @@ export function Features() {
                   bg-white/[0.88]
 
                   p-6
+                  min-[68.75rem]:px-5
+                  min-[68.75rem]:pt-5
+                  xl:px-6
+                  xl:pt-6
                   pb-24
 
                   shadow-[0_12px_32px_rgba(35,108,134,0.045)]
@@ -3479,12 +3493,16 @@ export function Features() {
                     flex
                     items-start
                     gap-4
+                    min-[68.75rem]:gap-3
+                    xl:gap-4
                   "
               >
                 <div
                   className="
                       grid
                       size-10
+                      min-[68.75rem]:size-9
+                      xl:size-10
                       shrink-0
                       place-items-center
 
@@ -3518,12 +3536,11 @@ export function Features() {
                   <h3
                     className="
                         font-display
-
                         text-[1.12rem]
                         font-semibold
-
                         leading-6
-
+                        tracking-normal
+                        [overflow-wrap:normal]
                         text-[#001D2D]
                       "
                   >
@@ -3954,7 +3971,7 @@ export function ProductDemoCTA() {
             items-center
             gap-14
 
-            lg:grid-cols-[1.05fr_0.95fr]
+            lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]
             lg:gap-20
           "
         >
@@ -4008,20 +4025,9 @@ export function ProductDemoCTA() {
 
             <h2
               className="
+                title-section
                 max-w-[690px]
-
-                font-display
-
-                text-[clamp(2.7rem,4.5vw,4.8rem)]
-
-                font-medium
-
-                leading-[0.92]
-
-                tracking-[-0.045em]
-
                 text-white
-
                 drop-shadow-[0_3px_18px_rgba(0,0,0,0.22)]
               "
             >
@@ -4247,11 +4253,7 @@ export function ProductDemoCTA() {
                     <div>
                       <h3
                         className="
-                            font-display
-
-                            text-lg
-                            font-semibold
-
+                            title-card
                             text-white
                           "
                       >
@@ -4683,12 +4685,14 @@ export function SolutionsAndDifference() {
               min-h-[620px]
               items-center
               gap-14
-              lg:grid-cols-[0.8fr_1.2fr]
+              lg:grid-cols-[minmax(0,0.48fr)_minmax(0,0.52fr)]
+              lg:gap-6
+              xl:gap-8
             "
           >
             {/* TEXTO */}
 
-            <div className="relative z-20 max-w-[650px]">
+            <div className="relative z-20 min-w-0 max-w-[650px]">
               <div className="mb-7 flex items-center gap-4">
                 <span
                   className="
@@ -4714,11 +4718,7 @@ export function SolutionsAndDifference() {
 
               <h1
                 className="
-                  font-display
-                  text-[clamp(3.2rem,5vw,5.7rem)]
-                  font-semibold
-                  leading-[0.91]
-                  tracking-[-0.045em]
+                  title-page hero-title-solutions
                   text-white
                 "
               >
@@ -4773,6 +4773,7 @@ export function SolutionsAndDifference() {
               className="
                 relative
                 hidden
+                min-w-0
                 h-[500px]
                 lg:block
               "
@@ -4780,8 +4781,11 @@ export function SolutionsAndDifference() {
               <div
                 className="
                   absolute
-                  left-[18%]
+                  left-[8%]
+                  right-0
                   top-[10%]
+                  w-fit
+                  max-w-[92%]
                   flex
                   items-center
                   gap-4
@@ -4799,6 +4803,7 @@ export function SolutionsAndDifference() {
                   className="
                     grid
                     size-10
+                    shrink-0
                     place-items-center
                     rounded-xl
                     bg-[#39D9FF]/10
@@ -4818,8 +4823,10 @@ export function SolutionsAndDifference() {
               <div
                 className="
                   absolute
-                  right-[2%]
+                  right-0
+                  max-w-full
                   top-[38%]
+                  w-fit
                   flex
                   items-center
                   gap-4
@@ -4837,6 +4844,7 @@ export function SolutionsAndDifference() {
                   className="
                     grid
                     size-10
+                    shrink-0
                     place-items-center
                     rounded-xl
                     bg-[#39D9FF]/10
@@ -4857,7 +4865,10 @@ export function SolutionsAndDifference() {
                 className="
                   absolute
                   bottom-[8%]
-                  left-[38%]
+                  w-fit
+                  max-w-[82%]
+                  left-[18%]
+                  right-0
                   flex
                   items-center
                   gap-4
@@ -4875,6 +4886,7 @@ export function SolutionsAndDifference() {
                   className="
                     grid
                     size-10
+                    shrink-0
                     place-items-center
                     rounded-xl
                     bg-[#39D9FF]/10
@@ -4954,8 +4966,12 @@ export function SolutionsAndDifference() {
               grid
               items-end
               gap-10
-              lg:grid-cols-[0.72fr_1.28fr]
-              lg:gap-12
+              lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)]
+              min-[73.75rem]:grid-cols-[minmax(0,0.29fr)_minmax(0,0.71fr)]
+              xl:grid-cols-[minmax(0,0.66fr)_minmax(0,1.34fr)]
+              lg:gap-8
+              min-[73.75rem]:gap-6
+              xl:gap-8
             "
           >
             <div>
@@ -4977,11 +4993,7 @@ export function SolutionsAndDifference() {
 
               <h2
                 className="
-                  font-display
-                  text-[clamp(2.8rem,4.2vw,4.6rem)]
-                  font-medium
-                  leading-[0.94]
-                  tracking-[-0.04em]
+                  title-section
                   text-[#001D2D]
                 "
               >
@@ -5008,9 +5020,12 @@ export function SolutionsAndDifference() {
             <div
               className="
                 grid
+                min-w-0
                 gap-4
                 sm:grid-cols-2
-                xl:grid-cols-4
+                min-[73.75rem]:grid-cols-[repeat(4,minmax(0,1fr))]
+                min-[73.75rem]:gap-3
+                xl:gap-4
               "
             >
               {audiences.map(({ title, text, Icon }) => (
@@ -5019,6 +5034,7 @@ export function SolutionsAndDifference() {
                   className="
                     group
                     relative
+                    min-w-0
                     min-h-[285px]
                     overflow-hidden
                     rounded-[18px]
@@ -5026,6 +5042,9 @@ export function SolutionsAndDifference() {
                     border-[#A9D7E2]
                     bg-white/90
                     p-6
+                    pb-16
+                    min-[73.75rem]:p-4
+                    min-[73.75rem]:pb-16
                     shadow-[0_12px_30px_rgba(35,108,134,0.05)]
                     transition-all
                     duration-300
@@ -5049,11 +5068,8 @@ export function SolutionsAndDifference() {
 
                   <h3
                     className="
-                      mt-6
-                      font-display
-                      text-lg
-                      font-semibold
-                      leading-6
+                      font-display text-lg font-semibold leading-6 tracking-normal [overflow-wrap:normal]
+                      mt-5
                       text-[#001D2D]
                     "
                   >
@@ -5063,8 +5079,8 @@ export function SolutionsAndDifference() {
                   <p
                     className="
                       mt-3
-                      text-sm
-                      leading-6
+                      text-[13px]
+                      leading-5
                       text-[#526E7B]
                     "
                   >
@@ -5138,7 +5154,8 @@ export function SolutionsAndDifference() {
               grid
               items-center
               gap-14
-              lg:grid-cols-[0.95fr_1.05fr]
+              lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]
+              lg:gap-8
             "
           >
             {/* TEXTO + CICLO */}
@@ -5169,12 +5186,8 @@ export function SolutionsAndDifference() {
 
               <h2
                 className="
+                  title-section
                   max-w-[730px]
-                  font-display
-                  text-[clamp(2.8rem,4.4vw,4.8rem)]
-                  font-medium
-                  leading-[0.94]
-                  tracking-[-0.04em]
                   text-white
                 "
               >
@@ -5201,13 +5214,13 @@ export function SolutionsAndDifference() {
                 className="
                   mt-12
                   grid
-                  gap-8
+                  gap-4
                   sm:grid-cols-2
-                  xl:grid-cols-4
+                  min-[68.75rem]:grid-cols-4
                 "
               >
                 {cycle.map(({ number, title, text, Icon }, index) => (
-                  <div key={title} className="relative">
+                  <div key={title} className="relative min-w-0">
                     <div
                       className="
                           relative
@@ -5235,11 +5248,11 @@ export function SolutionsAndDifference() {
                             top-7
                             hidden
                             h-px
-                            w-[calc(100%-3.5rem)]
+                            w-[calc(100%+1rem-3.5rem)]
                             bg-gradient-to-r
                             from-[#39D9FF]
                             to-[#39D9FF]/20
-                            xl:block
+                            min-[68.75rem]:block
                           "
                       />
                     )}
@@ -5258,10 +5271,8 @@ export function SolutionsAndDifference() {
 
                     <h3
                       className="
+                          font-display text-lg font-semibold leading-6 tracking-normal [overflow-wrap:normal]
                           mt-1
-                          font-display
-                          text-lg
-                          font-semibold
                           text-white
                         "
                     >
@@ -5290,7 +5301,9 @@ export function SolutionsAndDifference() {
                 relative
                 mx-auto
                 w-full
+                min-w-0
                 max-w-[760px]
+                lg:px-3
                 [perspective:1800px]
               "
             >
@@ -5394,11 +5407,7 @@ export function SolutionsAndDifference() {
 
             <h2
               className="
-                font-display
-                text-[clamp(2.8rem,4.2vw,4.5rem)]
-                font-medium
-                leading-[0.95]
-                tracking-[-0.04em]
+                title-section
                 text-[#001D2D]
               "
             >
@@ -5428,7 +5437,7 @@ export function SolutionsAndDifference() {
               grid
               gap-4
               md:grid-cols-2
-              xl:grid-cols-4
+              min-[68.75rem]:grid-cols-4
             "
           >
             {benefits.map(({ title, text, Icon }) => (
@@ -5437,6 +5446,7 @@ export function SolutionsAndDifference() {
                 className="
                   group
                   relative
+                  min-w-0
                   min-h-[210px]
                   overflow-hidden
                   rounded-[18px]
@@ -5444,6 +5454,9 @@ export function SolutionsAndDifference() {
                   border-[#A9D7E2]
                   bg-white/88
                   p-6
+                  pb-12
+                  min-[68.75rem]:px-5
+                  xl:px-6
                   shadow-[0_12px_30px_rgba(35,108,134,0.045)]
                   transition-all
                   duration-300
@@ -5451,7 +5464,7 @@ export function SolutionsAndDifference() {
                   hover:border-[#39CFE9]/75
                 "
               >
-                <div className="flex items-start gap-4">
+                <div className="flex min-w-0 items-start gap-3 xl:gap-4">
                   <span
                     className="
                       grid
@@ -5466,12 +5479,10 @@ export function SolutionsAndDifference() {
                     <Icon className="size-5" />
                   </span>
 
-                  <div>
+                  <div className="min-w-0">
                     <h3
                       className="
-                        font-display
-                        text-lg
-                        font-semibold
+                        font-display text-lg font-semibold leading-6 tracking-normal [overflow-wrap:normal]
                         text-[#001D2D]
                       "
                     >
@@ -5582,13 +5593,9 @@ export function SolutionsAndDifference() {
 
               <h2
                 className="
+                  title-section
                   mt-5
                   max-w-[600px]
-                  font-display
-                  text-[clamp(3rem,4.5vw,4.8rem)]
-                  font-medium
-                  leading-[0.93]
-                  tracking-[-0.04em]
                   text-[#001D2D]
                 "
               >
@@ -5961,13 +5968,14 @@ export function TechnologyAndCases() {
               min-h-[640px]
               items-center
               gap-12
-              lg:grid-cols-[0.78fr_1.22fr]
-              lg:gap-4
+              lg:grid-cols-[minmax(0,0.44fr)_minmax(0,0.56fr)]
+              lg:gap-6
+              xl:gap-8
             "
           >
             {/* TEXTO */}
 
-            <div className="relative z-20 max-w-[650px]">
+            <div className="relative z-20 min-w-0 max-w-[650px]">
               <div className="mb-6 flex items-center gap-4">
                 <span
                   className="
@@ -5993,11 +6001,7 @@ export function TechnologyAndCases() {
 
               <h1
                 className="
-                  font-display
-                  text-[clamp(3rem,5vw,5.4rem)]
-                  font-semibold
-                  leading-[0.99]
-                  tracking-[-0.045em]
+                  title-page hero-title-technology
                   text-white
                 "
               >
@@ -6056,44 +6060,49 @@ export function TechnologyAndCases() {
 
             <div
               className="
-                relative
-                min-h-[520px]
-                lg:min-h-[610px]
-              "
+                          relative
+                          isolate
+                          min-w-0
+                          lg:min-h-[520px]
+                          xl:min-h-[610px]
+                        "
             >
               {/* HALO */}
 
               <div
                 className="
-                  pointer-events-none
-                  absolute
-                  left-[1%]
-                  top-[7%]
-                  h-[520px]
-                  w-[80%]
-                  rounded-full
-                  bg-[#00BDE2]/[0.16]
-                  blur-[100px]
-                "
+                            pointer-events-none
+                            absolute
+                            left-[1%]
+                            top-[7%]
+                            h-[520px]
+                            w-[80%]
+                            rounded-full
+                            bg-[#00BDE2]/[0.16]
+                            blur-[100px]
+                          "
               />
 
               {/* ==================================================
-                   IMAGEN HERO · AMPLIADA
-                =================================================== */}
+                             IMAGEN HERO · AMPLIADA
+                          =================================================== */}
 
               <img
                 src="/images/tecnologia/tecnologia-hero-cuenca.png"
                 alt="Representación tecnológica multicapa de una cuenca hidrológica"
                 className="
-                  absolute
-                  left-[10%]
-                  top-[3%]
-                  z-[5]
-                  h-[100%]
-                  w-[100%]
-                  object-contain
-                  drop-shadow-[0_30px_45px_rgba(0,0,0,0.45)]
-                "
+                            relative
+                            z-[5]
+                            aspect-[1672/941]
+                            w-full
+                            lg:absolute
+                            lg:left-0
+                            lg:top-[3%]
+                            lg:h-[94%]
+                            lg:w-full
+                            object-contain
+                            drop-shadow-[0_30px_45px_rgba(0,0,0,0.45)]
+                          "
                 style={{
                   maskImage:
                     "radial-gradient(ellipse 94% 92% at center, black 65%, transparent 100%)",
@@ -6103,146 +6112,180 @@ export function TechnologyAndCases() {
               />
 
               {/* ==================================================
-                   CONECTORES HERO · MÁS CORTOS
-                =================================================== */}
-
-              <svg
-                className="
-                  pointer-events-none
-                  absolute
-                  inset-0
-                  z-10
-                  hidden
-                  size-full
-                  xl:block
-                "
-                viewBox="0 0 900 610"
-                fill="none"
-                preserveAspectRatio="none"
-                aria-hidden="true"
-              >
-                <defs>
-                  <filter id="technologyHeroGlow" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="3" result="blur" />
-
-                    <feMerge>
-                      <feMergeNode in="blur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-                </defs>
-
-                {/* DATOS */}
-
-                <path
-                  d="M490 155 L635 155 L688 120"
-                  stroke="#63E7FF"
-                  strokeWidth="1.1"
-                  opacity=".86"
-                />
-
-                <circle cx="490" cy="155" r="4" fill="#63E7FF" filter="url(#technologyHeroGlow)" />
-
-                {/* MODELOS */}
-
-                <path
-                  d="M490 227 L642 227 L688 199"
-                  stroke="#63E7FF"
-                  strokeWidth="1.1"
-                  opacity=".86"
-                />
-
-                <circle cx="490" cy="227" r="4" fill="#63E7FF" filter="url(#technologyHeroGlow)" />
-
-                {/* INTELIGENCIA */}
-
-                <path
-                  d="M590 300 L648 300 L688 278"
-                  stroke="#63E7FF"
-                  strokeWidth="1.1"
-                  opacity=".9"
-                />
-
-                <circle cx="590" cy="300" r="4" fill="#63E7FF" filter="url(#technologyHeroGlow)" />
-
-                {/* SIMULACIÓN */}
-
-                <path
-                  d="M600 373 L642 373 L688 357"
-                  stroke="#63E7FF"
-                  strokeWidth="1.1"
-                  opacity=".86"
-                />
-
-                <circle cx="600" cy="373" r="4" fill="#63E7FF" filter="url(#technologyHeroGlow)" />
-
-                {/* VISUALIZACIÓN */}
-
-                <path
-                  d="M575 445 L635 445 L688 436"
-                  stroke="#63E7FF"
-                  strokeWidth="1.1"
-                  opacity=".86"
-                />
-
-                <circle cx="575" cy="445" r="4" fill="#63E7FF" filter="url(#technologyHeroGlow)" />
-              </svg>
+                             CONECTORES HERO · MÁS CORTOS
+                          =================================================== */}
 
               {/* LABELS HERO */}
 
-              {heroLabels.map(({ title, text, Icon, top }) => (
-                <div
-                  key={title}
+              <div className="relative z-20 mt-6 grid grid-cols-2 gap-x-4 gap-y-2 sm:grid-cols-3 lg:absolute lg:inset-0 lg:mt-0 lg:block lg:transform-gpu">
+                <svg
                   className="
-                      absolute
-                      right-[0%]
-                      z-20
-                      hidden
-                      w-[180px]
-                      items-center
-                      gap-3
-                      py-2
-                      xl:flex
-                    "
-                  style={{
-                    top,
-                  }}
+                            pointer-events-none
+                            absolute
+                            inset-0
+                            z-10
+                            hidden
+                            size-full
+                            lg:block
+                          "
+                  viewBox="0 0 900 610"
+                  fill="none"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
                 >
-                  <Icon
-                    className="
-                        -ml-1
-                        size-5
-                        shrink-0
-                        text-[#7CEEFF]
-                        drop-shadow-[0_0_6px_rgba(99,231,255,0.75)]
-                      "
+                  <defs>
+                    <filter id="technologyHeroGlow" x="-50%" y="-50%" width="200%" height="200%">
+                      <feGaussianBlur stdDeviation="3" result="blur" />
+
+                      <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+
+                  {/* DATOS */}
+
+                  <path
+                    d="M490 155 L635 155 L688 120"
+                    stroke="#63E7FF"
+                    strokeWidth="1.1"
+                    opacity=".86"
                   />
 
-                  <div>
-                    <p
-                      className="
-                          text-sm
-                          font-semibold
-                          leading-tight
-                          text-white
-                        "
-                    >
-                      {title}
-                    </p>
+                  <circle
+                    cx="490"
+                    cy="155"
+                    r="4"
+                    fill="#63E7FF"
+                    filter="url(#technologyHeroGlow)"
+                  />
 
-                    <p
+                  {/* MODELOS */}
+
+                  <path
+                    d="M490 227 L642 227 L688 199"
+                    stroke="#63E7FF"
+                    strokeWidth="1.1"
+                    opacity=".86"
+                  />
+
+                  <circle
+                    cx="490"
+                    cy="227"
+                    r="4"
+                    fill="#63E7FF"
+                    filter="url(#technologyHeroGlow)"
+                  />
+
+                  {/* INTELIGENCIA */}
+
+                  <path
+                    d="M590 300 L648 300 L688 278"
+                    stroke="#63E7FF"
+                    strokeWidth="1.1"
+                    opacity=".9"
+                  />
+
+                  <circle
+                    cx="590"
+                    cy="300"
+                    r="4"
+                    fill="#63E7FF"
+                    filter="url(#technologyHeroGlow)"
+                  />
+
+                  {/* SIMULACIÓN */}
+
+                  <path
+                    d="M600 373 L642 373 L688 357"
+                    stroke="#63E7FF"
+                    strokeWidth="1.1"
+                    opacity=".86"
+                  />
+
+                  <circle
+                    cx="600"
+                    cy="373"
+                    r="4"
+                    fill="#63E7FF"
+                    filter="url(#technologyHeroGlow)"
+                  />
+
+                  {/* VISUALIZACIÓN */}
+
+                  <path
+                    d="M575 445 L635 445 L688 436"
+                    stroke="#63E7FF"
+                    strokeWidth="1.1"
+                    opacity=".86"
+                  />
+
+                  <circle
+                    cx="575"
+                    cy="445"
+                    r="4"
+                    fill="#63E7FF"
+                    filter="url(#technologyHeroGlow)"
+                  />
+                </svg>
+                {heroLabels.map(({ title, text, Icon, top }) => (
+                  <div
+                    key={title}
+                    className="
+                                relative
+                                z-20
+                                flex
+                                min-w-0
+                                items-center
+                                lg:absolute
+                                lg:left-[76.5%]
+                                lg:right-0
+                                lg:top-[var(--hero-label-top)]
+                                gap-2
+                                xl:gap-3
+                                py-2
+                              "
+                    style={{ "--hero-label-top": top } as CSSProperties}
+                  >
+                    <Icon
                       className="
-                          mt-0.5
-                          text-[11px]
-                          leading-4
-                          text-white/55
-                        "
-                    >
-                      {text}
-                    </p>
+                                  -ml-1
+                                  size-4
+                                  xl:size-5
+                                  shrink-0
+                                  text-[#7CEEFF]
+                                  drop-shadow-[0_0_6px_rgba(99,231,255,0.75)]
+                                "
+                    />
+
+                    <div>
+                      <p
+                        className="
+                                    text-[13px]
+                                    xl:text-sm
+                                    font-semibold
+                                    leading-tight
+                                    text-white
+                                  "
+                      >
+                        {title}
+                      </p>
+
+                      <p
+                        className="
+                                    mt-0.5
+                                    text-[11px]
+                                    leading-4
+                                    text-white/55
+                                  "
+                      >
+                        {text}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -6307,7 +6350,11 @@ export function TechnologyAndCases() {
               grid
               items-center
               gap-12
-              lg:grid-cols-[0.78fr_1.22fr]
+              lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)]
+              min-[73.75rem]:grid-cols-[minmax(0,0.34fr)_minmax(0,0.66fr)]
+              min-[73.75rem]:gap-6
+              xl:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)]
+              xl:gap-12
             "
           >
             <div>
@@ -6325,12 +6372,8 @@ export function TechnologyAndCases() {
 
               <h2
                 className="
+                  title-section
                   mt-5
-                  font-display
-                  text-[clamp(2.8rem,4vw,4.6rem)]
-                  font-medium
-                  leading-[0.98]
-                  tracking-[-0.04em]
                   text-[#001D2D]
                 "
               >
@@ -6357,22 +6400,25 @@ export function TechnologyAndCases() {
             <div
               className="
                 grid
+                min-w-0
                 gap-4
                 sm:grid-cols-2
-                xl:grid-cols-4
+                min-[73.75rem]:grid-cols-[repeat(4,minmax(0,1fr))]
               "
             >
               {architecture.map(({ title, text, Icon }, index) => (
-                <div key={title} className="relative text-center">
+                <div key={title} className="relative min-w-0 text-center">
                   <article
                     className="
                         relative
+                        h-full
+                        min-w-0
                         min-h-[245px]
                         rounded-[18px]
                         border
                         border-[#B4DBE5]
                         bg-white/88
-                        px-5
+                        px-4
                         py-7
                         shadow-[0_12px_30px_rgba(35,108,134,0.045)]
                       "
@@ -6393,10 +6439,8 @@ export function TechnologyAndCases() {
 
                     <h3
                       className="
+                          font-display text-base font-semibold leading-6 tracking-normal [overflow-wrap:normal]
                           mt-6
-                          font-display
-                          text-base
-                          font-semibold
                           text-[#001D2D]
                         "
                     >
@@ -6419,13 +6463,15 @@ export function TechnologyAndCases() {
                     <ArrowRight
                       className="
                           absolute
-                          -right-[18px]
-                          top-[105px]
+                          left-[calc(100%+0.5rem)]
+                          top-1/2
+                          -translate-x-1/2
+                          -translate-y-1/2
                           z-20
                           hidden
                           size-5
                           text-[#00BFD7]
-                          xl:block
+                          min-[73.75rem]:block
                         "
                     />
                   )}
@@ -6479,12 +6525,14 @@ export function TechnologyAndCases() {
               grid
               items-center
               gap-14
-              lg:grid-cols-[0.82fr_1.18fr]
+              lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]
+              lg:gap-6
+              xl:gap-8
             "
           >
             {/* TEXTO */}
 
-            <div>
+            <div className="min-w-0">
               <p
                 className="
                   text-[11px]
@@ -6499,13 +6547,9 @@ export function TechnologyAndCases() {
 
               <h2
                 className="
+                  title-section
                   mt-5
                   max-w-[670px]
-                  font-display
-                  text-[clamp(2.8rem,4.3vw,4.6rem)]
-                  font-medium
-                  leading-[0.94]
-                  tracking-[-0.04em]
                   text-white
                 "
               >
@@ -6537,6 +6581,8 @@ export function TechnologyAndCases() {
             <div
               className="
                 relative
+                isolate
+                min-w-0
                 min-h-[540px]
               "
             >
@@ -6554,7 +6600,7 @@ export function TechnologyAndCases() {
                   rounded-full
                   bg-[#00CBE5]/[0.13]
                   blur-[90px]
-                  xl:block
+                  lg:block
                 "
               />
 
@@ -6575,11 +6621,11 @@ export function TechnologyAndCases() {
                   max-w-[620px]
                   object-contain
                   drop-shadow-[0_30px_45px_rgba(0,0,0,0.42)]
-                  xl:absolute
-                  xl:left-[-2%]
-                  xl:top-1/2
-                  xl:w-[65%]
-                  xl:-translate-y-1/2
+                  lg:absolute
+                  lg:left-0
+                  lg:top-1/2
+                  lg:w-[62%]
+                  lg:-translate-y-1/2
                 "
                 style={{
                   maskImage:
@@ -6593,57 +6639,6 @@ export function TechnologyAndCases() {
                    CONECTORES
                 =================================================== */}
 
-              <svg
-                className="
-                  pointer-events-none
-                  absolute
-                  inset-0
-                  z-20
-                  hidden
-                  size-full
-                  xl:block
-                "
-                viewBox="0 0 900 540"
-                fill="none"
-                preserveAspectRatio="none"
-                aria-hidden="true"
-              >
-                <defs>
-                  <filter id="dataSourceGlow" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="2.5" result="blur" />
-
-                    <feMerge>
-                      <feMergeNode in="blur" />
-                      <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                  </filter>
-                </defs>
-
-                {/* SATÉLITES */}
-
-                <path d="M515 118 H722" stroke="#63E7FF" strokeWidth="1.15" opacity=".82" />
-
-                <circle cx="515" cy="118" r="4" fill="#63E7FF" filter="url(#dataSourceGlow)" />
-
-                {/* RADAR */}
-
-                <path d="M515 214 H722" stroke="#63E7FF" strokeWidth="1.15" opacity=".82" />
-
-                <circle cx="515" cy="214" r="4" fill="#63E7FF" filter="url(#dataSourceGlow)" />
-
-                {/* AFOROS */}
-
-                <path d="M515 314 H722" stroke="#63E7FF" strokeWidth="1.15" opacity=".82" />
-
-                <circle cx="515" cy="314" r="4" fill="#63E7FF" filter="url(#dataSourceGlow)" />
-
-                {/* TERRITORIO */}
-
-                <path d="M480 414 H722" stroke="#63E7FF" strokeWidth="1.15" opacity=".82" />
-
-                <circle cx="480" cy="414" r="4" fill="#63E7FF" filter="url(#dataSourceGlow)" />
-              </svg>
-
               {/* ==================================================
                    LABELS DESKTOP · DESPLAZADOS A LA DERECHA
                 =================================================== */}
@@ -6652,24 +6647,76 @@ export function TechnologyAndCases() {
                 className="
                   pointer-events-none
                   absolute
-                  right-[-82px]
-                  top-0
+                  inset-0
+                  z-30
                   hidden
-                  h-full
-                  w-[235px]
-                  xl:block
+                  lg:block
+                  lg:transform-gpu
                 "
               >
+                <svg
+                  className="
+                  pointer-events-none
+                  absolute
+                  inset-0
+                  z-20
+                  hidden
+                  size-full
+                  lg:block
+                "
+                  viewBox="0 0 900 540"
+                  fill="none"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <filter id="dataSourceGlow" x="-50%" y="-50%" width="200%" height="200%">
+                      <feGaussianBlur stdDeviation="2.5" result="blur" />
+
+                      <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+
+                  {/* SATÉLITES */}
+
+                  <path d="M515 118 H600" stroke="#63E7FF" strokeWidth="1.15" opacity=".82" />
+
+                  <circle cx="515" cy="118" r="4" fill="#63E7FF" filter="url(#dataSourceGlow)" />
+
+                  {/* RADAR */}
+
+                  <path d="M515 214 H600" stroke="#63E7FF" strokeWidth="1.15" opacity=".82" />
+
+                  <circle cx="515" cy="214" r="4" fill="#63E7FF" filter="url(#dataSourceGlow)" />
+
+                  {/* AFOROS */}
+
+                  <path d="M515 314 H600" stroke="#63E7FF" strokeWidth="1.15" opacity=".82" />
+
+                  <circle cx="515" cy="314" r="4" fill="#63E7FF" filter="url(#dataSourceGlow)" />
+
+                  {/* TERRITORIO */}
+
+                  <path d="M480 414 H600" stroke="#63E7FF" strokeWidth="1.15" opacity=".82" />
+
+                  <circle cx="480" cy="414" r="4" fill="#63E7FF" filter="url(#dataSourceGlow)" />
+                </svg>
                 {dataSources.map(({ title, text, Icon, top }) => (
                   <div
                     key={title}
                     className="
                         absolute
+                        left-[67%]
                         right-0
+                        z-30
                         flex
-                        w-[225px]
+                        min-w-0
                         items-start
-                        gap-4
+                        gap-3
+                        xl:gap-4
                       "
                     style={{
                       top,
@@ -6693,7 +6740,7 @@ export function TechnologyAndCases() {
                       <Icon className="size-4" />
                     </span>
 
-                    <div>
+                    <div className="min-w-0">
                       <p
                         className="
                             text-sm
@@ -6730,7 +6777,7 @@ export function TechnologyAndCases() {
                   grid
                   gap-5
                   sm:grid-cols-2
-                  xl:hidden
+                  lg:hidden
                 "
               >
                 {dataSources.map(({ title, text, Icon }) => (
@@ -6833,12 +6880,8 @@ export function TechnologyAndCases() {
 
               <h2
                 className="
+                  title-section
                   mt-5
-                  font-display
-                  text-[clamp(2.9rem,4.4vw,4.8rem)]
-                  font-medium
-                  leading-[0.93]
-                  tracking-[-0.04em]
                   text-[#001D2D]
                 "
               >
@@ -6905,10 +6948,8 @@ export function TechnologyAndCases() {
 
                   <h3
                     className="
+                        title-card
                         mt-7
-                        font-display
-                        text-lg
-                        font-semibold
                         text-[#001D2D]
                       "
                   >
@@ -7047,13 +7088,9 @@ export function TechnologyAndCases() {
 
               <h2
                 className="
+                  title-section
                   mt-5
                   max-w-[650px]
-                  font-display
-                  text-[clamp(2.9rem,4.4vw,4.8rem)]
-                  font-medium
-                  leading-[0.94]
-                  tracking-[-0.04em]
                   text-white
                 "
               >
@@ -7295,7 +7332,7 @@ export function DeliveryAndTrust() {
               <article key={x} className="border-t border-primary pt-5">
                 <span className="text-xs text-primary">0{i + 1}</span>
 
-                <h3 className="mt-8 font-display text-xl">{x}</h3>
+                <h3 className="title-card mt-8">{x}</h3>
               </article>
             ))}
           </div>
@@ -7466,7 +7503,7 @@ export function FinalCta() {
   return (
     <section className="section-space dark-band topo-field">
       <div className="section-shell text-center">
-        <h2 className="mx-auto max-w-5xl font-display text-[clamp(3rem,7vw,6.5rem)] font-medium leading-[.95]">
+        <h2 className="title-section mx-auto max-w-5xl">
           {tr("El riesgo no espera.")}
 
           <br />
@@ -7690,7 +7727,7 @@ export function DemoForm() {
               <Check className="size-6 text-primary" />
             </div>
 
-            <h3 id="demo-success-title" className="mt-6 font-display text-2xl font-semibold text-foreground">
+            <h3 id="demo-success-title" className="title-card mt-6 text-foreground">
               {copy.successTitle}
             </h3>
 

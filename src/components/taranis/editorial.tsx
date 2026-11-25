@@ -217,18 +217,8 @@ export function ProductSeoSection() {
 
             <h2
               className="
+                title-section
                 max-w-[820px]
-
-                font-display
-
-                text-[clamp(3rem,5vw,5.2rem)]
-
-                font-medium
-
-                leading-[0.96]
-
-                tracking-[-0.045em]
-
                 text-[#001D2D]
               "
             >
@@ -671,15 +661,10 @@ export function ProductSeoSection() {
 
               <h3
                 className="
+                    title-card
                     relative
                     z-20
-
                     mt-7
-
-                    font-display
-                    text-[1.45rem]
-                    font-medium
-
                     text-[#001D2D]
                   "
               >
@@ -887,7 +872,7 @@ export function TechnologyDeepDive() {
           {localizeDeep(layers).map(([Icon, title, text]) => (
             <article key={title} className="bg-card p-7">
               <Icon className="size-6 text-primary" aria-hidden="true" />
-              <h2 className="mt-8 font-display text-2xl">{title}</h2>
+              <h2 className="title-card mt-8">{title}</h2>
               <p className="mt-4 text-sm leading-7 text-muted-foreground">{text}</p>
             </article>
           ))}
@@ -895,7 +880,7 @@ export function TechnologyDeepDive() {
         <div className="mt-16 grid gap-12 lg:grid-cols-2">
           <div>
             <p className="eyebrow mb-5">{tr("Modelizaci\xF3n h\xEDbrida")}</p>
-            <h2 className="font-display text-4xl font-medium leading-tight">
+            <h2 className="title-section">
               {tr("Hidrolog\xEDa e inteligencia artificial, no una u otra.")}
             </h2>
           </div>
@@ -943,7 +928,7 @@ export function SolutionsIndex() {
               className="group rounded-2xl border border-border bg-card p-8 transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-aqua"
             >
               <p className="eyebrow">{solution.eyebrow}</p>
-              <h2 className="mt-8 font-display text-3xl">{solution.title}</h2>
+              <h2 className="title-card mt-8">{solution.title}</h2>
               <p className="mt-5 max-w-xl leading-7 text-muted-foreground">
                 {solution.description}
               </p>
@@ -966,7 +951,7 @@ export function SolutionPage({ solution: rawSolution }: { solution: Solution }) 
         <div className="section-shell grid gap-12 lg:grid-cols-2">
           <div>
             <p className="eyebrow mb-5">{tr("Necesidades")}</p>
-            <h2 className="font-display text-4xl font-medium leading-tight">
+            <h2 className="title-section">
               {tr("Qu\xE9 debe poder comprender la organizaci\xF3n.")}
             </h2>
             <ul className="mt-8 space-y-4">
@@ -980,9 +965,7 @@ export function SolutionPage({ solution: rawSolution }: { solution: Solution }) 
           </div>
           <div>
             <p className="eyebrow mb-5">{tr("TARANIS")}</p>
-            <h2 className="font-display text-4xl font-medium leading-tight">
-              {tr("Capacidades configurables para ese contexto.")}
-            </h2>
+            <h2 className="title-section">{tr("Capacidades configurables para ese contexto.")}</h2>
             <ul className="mt-8 space-y-4">
               {solution.capabilities.map((item) => (
                 <li key={item} className="flex gap-3 text-lg text-muted-foreground">
@@ -1040,7 +1023,7 @@ export function ResourcesGrid({ limit }: { limit?: number }) {
                 </span>
               </div>
               <div className="p-6">
-                <h2 className="font-display text-xl leading-snug">{resource.shortTitle}</h2>
+                <h2 className="title-card">{resource.shortTitle}</h2>
                 <p className="mt-4 text-sm leading-6 text-muted-foreground">
                   {resource.description}
                 </p>
@@ -1073,9 +1056,7 @@ export function ResourceArticle({ resource: rawResource }: { resource: Resource 
           <div className="max-w-3xl space-y-16">
             {resource.sections.map((section) => (
               <section key={section.heading}>
-                <h2 className="font-display text-4xl font-medium leading-tight">
-                  {section.heading}
-                </h2>
+                <h2 className="title-section">{section.heading}</h2>
                 <div className="mt-6 space-y-5 text-lg leading-8 text-muted-foreground">
                   {section.paragraphs.map((paragraph) => (
                     <p key={paragraph}>{paragraph}</p>

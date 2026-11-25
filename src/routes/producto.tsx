@@ -399,7 +399,7 @@ function ProductHero() {
 
 
 
-            lg:grid-cols-[0.82fr_1.18fr]
+            lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]
 
             lg:gap-8
 
@@ -408,7 +408,7 @@ function ProductHero() {
           {/* ==================================================
                 TEXTO
             =================================================== */}
-          <div className="relative z-30">
+          <div className="relative z-30 min-w-0">
             <div
               className="
                 mb-7
@@ -442,12 +442,8 @@ function ProductHero() {
 
             <h1
               className="
+                title-page hero-title-product
                 max-w-[690px]
-                font-display
-                text-[clamp(3.7rem,6vw,6rem)]
-                font-semibold
-                leading-[0.98]
-                tracking-[-0.045em]
                 text-on-dark
               "
             >
@@ -539,7 +535,10 @@ function ProductHero() {
 
 
 
-              lg:translate-x-[4%]
+              min-w-0
+              max-w-full
+              lg:px-5
+              lg:py-6
 
             "
           >
@@ -1069,7 +1068,7 @@ function ProductHero() {
 
 
 
-                -left-[5%]
+                left-0
 
                 top-[20%]
 
@@ -1204,7 +1203,7 @@ function ProductHero() {
 
 
 
-                -left-[1%]
+                left-0
 
                 bottom-[14%]
 
@@ -1356,7 +1355,7 @@ function ProductHero() {
 
 
 
-                right-[-4%]
+                right-0
 
                 top-[12%]
 

@@ -208,12 +208,12 @@ export function Navbar() {
           `,
       )}
     >
-      <div className="section-shell flex h-20 items-center justify-between">
+      <div className="section-shell flex h-20 items-center justify-between gap-4">
         <Brand />
 
         {/* Navegación escritorio */}
         <nav
-          className="hidden items-center gap-9 xl:flex"
+          className="hidden shrink-0 items-center gap-4 whitespace-nowrap lg:flex xl:gap-9"
           aria-label={tr("Navegación principal")}
         >
           {primaryNavItems.map(([label, to]) => (
@@ -237,7 +237,7 @@ export function Navbar() {
         </nav>
 
         {/* Idioma + CTA escritorio */}
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="hidden shrink-0 items-center gap-2 lg:flex xl:gap-4">
           <LanguageSwitcher />
 
           <Button
@@ -248,7 +248,10 @@ export function Navbar() {
               rounded-full
               border-primary/70
               bg-transparent
-              px-7
+              px-4
+              text-sm
+              xl:px-7
+              xl:text-base
               text-primary
               hover:bg-primary/10
             "
@@ -263,7 +266,9 @@ export function Navbar() {
         <Button
           variant="glass"
           size="icon"
-          className="md:hidden"
+          className="lg:hidden"
+          aria-expanded={open}
+          aria-controls="taranis-mobile-navigation"
           aria-label={
             open
               ? tr("Cerrar menú")
@@ -277,7 +282,10 @@ export function Navbar() {
 
       {/* Navegación móvil */}
       {open && (
-        <div className="border-t border-on-dark/10 bg-deep/95 px-4 py-6 backdrop-blur-xl md:hidden">
+        <div
+          id="taranis-mobile-navigation"
+          className="max-h-[calc(100dvh-5rem)] overflow-y-auto border-t border-on-dark/10 bg-deep/95 px-4 py-6 backdrop-blur-xl lg:hidden"
+        >
           <nav
             className="mx-auto flex max-w-lg flex-col"
             aria-label={tr("Navegación móvil")}
@@ -355,7 +363,7 @@ export function SectionHeader({
 
       <h2
         className={cn(
-          "display-title text-balance",
+          "title-section text-balance",
           dark
             ? "text-on-dark"
             : "text-foreground",
@@ -587,10 +595,7 @@ export function PageIntro({
 
             <h1
               className="
-                font-display
-                text-[clamp(3.4rem,8vw,7rem)]
-                font-medium
-                leading-[.95]
+                title-page
                 text-on-dark
               "
             >
